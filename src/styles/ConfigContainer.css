@@ -1,0 +1,53 @@
+.config-container {
+  width: 100%;
+  border: 1px solid;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  /* max-width: 560px; */
+  gap: 10px;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.config-item-container select {
+  appearance: none;
+  width: 100%;
+  font-size: 1.15rem;
+  padding: 0.675em 6em 0.675em 1em;
+  border: 1px solid;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.config-content {
+  display: flex;
+  transition: opacity 300ms ease-in-out;
+  flex-direction: column;
+  gap: 20px;
+}
+.config-content[aria-shoulddisplay='false'] {
+  opacity: 0;
+  display: none;
+}
+
+.env-input[aria-shoulddisplay='false'] {
+  opacity: 0;
+  display: none;
+}
+@media screen and (min-width: 900px) {
+  .config-content[aria-shoulddisplay='false'] {
+    opacity: 1;
+    display: flex;
+  }
+  .env-input[aria-shoulddisplay='false'] {
+    opacity: 1;
+    display: flex;
+  }
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  user-select: none;
+  cursor: pointer;
+}

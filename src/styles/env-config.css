@@ -1,0 +1,19 @@
+.env-container {
+  max-width: 260px;
+  width: 100%;
+  align-self: flex-start;
+}
+.env-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.env-input > input {
+  appearance: none;
+  width: 100%;
+  font-size: 1.15rem;
+  padding: 0.675em 6em 0.675em 1em;
+  border: 1px solid;
+  border-radius: 3px;
+  cursor: pointer;
+}
