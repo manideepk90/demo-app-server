@@ -1,27 +1,31 @@
 import './App.css';
-import ConfigContainer from './Components/ConfigContainer';
-import NavigationContainer from './Components/NavigationContainer';
-import EnvironmentConfig from './Components/EnvironmentConfig';
-import GitContainer from './Components/GitContainer';
+import NavigationContainer from './Components/navigation/NavigationContainer';
+import React from 'react';
+import SDKprops from './Components/sdkProps';
+import Server from './Components/server';
+// import {getData, getOptions, saveData} from './utils/fetchutils';
 
 function App() {
   return (
-    <>
+    <div className="main-container">
       <NavigationContainer />
       <main>
         <div className="root-container">
-          <ConfigContainer heading="Sdk Props" shouldDisplay />
-          <ConfigContainer heading="Server config" />
+          <SDKprops />
+          <Server />
         </div>
         <div className="root-container">
-          <EnvironmentConfig />
-          <GitContainer />
+          {/* <EnvironmentConfig
+            options={env.options}
+            initcontent={env.selectedJson}
+          />
+          <GitContainer options={git.options} initcontent={git.selectedJson} /> */}
         </div>
-        {/* <div className="root-container">
-          <button>Save & Run</button>
-        </div> */}
+        <div className="root-container">
+          <button className="bt bt-primary">Save & Run</button>
+        </div>
       </main>
-    </>
+    </div>
   );
 }
 

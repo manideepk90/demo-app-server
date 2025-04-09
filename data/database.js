@@ -39,7 +39,7 @@ async function createPropsTable(table) {
 async function createActiveServer() {
   try {
     await SQLiteHelper.createTable(
-      "activeserver",
+      'activeserver',
       `
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         key TEXT UNIQUE,
@@ -52,7 +52,7 @@ async function createActiveServer() {
       `,
     );
     console.log('Active Server table initialized!');
-    
+
     // Initialize default active server entry
     await initializeActiveServer();
   } catch (err) {
@@ -65,7 +65,7 @@ async function initializeActiveServer() {
     await SQLiteHelper.execute(
       `INSERT INTO activeserver (key, activeSdkProps, activeServerConfig, activeGitConfig, activeEnvConfig, createdAt, updatedAt)
        VALUES ('active', '', '', '', '', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
-       ON CONFLICT(key) DO NOTHING`
+       ON CONFLICT(key) DO NOTHING`,
     );
     console.log('Active Server initialized with default values!');
   } catch (err) {
@@ -78,11 +78,13 @@ async function getAllKeys(table) {
 }
 
 async function getItemByKey(table, key) {
-  return await SQLiteHelper.fetchOne(`SELECT * FROM ${table} WHERE key = ?`, [key]);
+  return await SQLiteHelper.fetchOne(`SELECT * FROM ${table} WHERE key = ?`, [
+    key,
+  ]);
 }
 
-async function getCount(table){
-    return await SQLiteHelper.fetchOne()
+async function getCount(table) {
+  return await SQLiteHelper.fetchOne();
 }
 
 async function addJsonToTable(table, key, json) {
@@ -92,7 +94,7 @@ async function addJsonToTable(table, key, json) {
        ON CONFLICT(key) DO UPDATE SET 
          json = excluded.json, 
          updatedAt = CURRENT_TIMESTAMP`,
-      [key, JSON.stringify(json)]
+      [key, JSON.stringify(json)],
     );
     console.log(`Entry added/updated in ${table}!`);
   } catch (err) {
@@ -104,7 +106,7 @@ async function setActiveServerKey(column, value) {
   try {
     await SQLiteHelper.execute(
       `UPDATE activeserver SET ${column} = ?, updatedAt = CURRENT_TIMESTAMP WHERE key = 'active'`,
-      [value]
+      [value],
     );
     console.log(`Active server ${column} updated!`);
   } catch (err) {
@@ -112,8 +114,14 @@ async function setActiveServerKey(column, value) {
   }
 }
 
+async function deleteItem(table, key) {
+  await SQLiteHelper.execute(`DELETE FROM ${table} WHERE key = ?`, [key]);
+}
+
 async function getActiveServer() {
-  return await SQLiteHelper.fetchOne(`SELECT * FROM activeserver WHERE key = 'active'`);
+  return await SQLiteHelper.fetchOne(
+    `SELECT * FROM activeserver WHERE key = 'active'`,
+  );
 }
 
 async function setup() {
@@ -131,4 +139,5 @@ export {
   addJsonToTable,
   setActiveServerKey,
   getActiveServer,
+  deleteItem,
 };

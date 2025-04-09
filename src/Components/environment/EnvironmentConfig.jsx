@@ -1,9 +1,12 @@
-import ConfigItem from './Config/ConfigItem';
-import '../styles/env-config.css';
+import ConfigItem from './../Config/ConfigItem';
+import './../../styles/env-config.css';
 import {useState} from 'react';
-export default function GitContainer({heading = 'Git'}) {
+export default function EnvironmentConfig({
+  heading = 'Environment',
+  options,
+  initContent={},
+}) {
   const [shouldDisplay, setShouldDisplay] = useState(false);
-
   return (
     <div className="config-container">
       <div className="heading">
@@ -11,10 +14,12 @@ export default function GitContainer({heading = 'Git'}) {
         <button>Save</button>
       </div>
       <div>
-        <ConfigItem />
+        <ConfigItem options={options} />
       </div>
       <div className="env-input" aria-shouldDisplay={shouldDisplay}>
-        <input placeholder="BRANCH / PR"></input>
+        <input placeholder="Publishable key"></input>
+        <input placeholder="API/Secret key"></input>
+        <input placeholder="Profile ID"></input>
       </div>
     </div>
   );

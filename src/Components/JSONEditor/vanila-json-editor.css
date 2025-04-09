@@ -1,0 +1,12 @@
+.vanilla-jsoneditor-react {
+  width: 100%;
+  height: 400px;
+}
+.jse-context-menu-pointer {
+  width : 20px !important;
+  min-width: none important;
+}
+/* .vanilla-jsoneditor-react > div {
+  height: 100% !important; 
+  min-height: 400px !important;
+} */
